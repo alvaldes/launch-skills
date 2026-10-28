@@ -16,14 +16,14 @@ Test runner: `claude plugin validate` and `claude plugin eval` (evals/), plus sh
 
 | ID | Specs | Route | Status | Evidence |
 |---|---|---|---|---|
-| T1 | S2, S7 | inline | pending | Scaffold: plugin.json, marketplace.json, README, LICENSE, channel reference |
-| T2 | S3, S4 | inline | pending | launch-tracker |
-| T3 | S3, S4 | inline | pending | launch-kit |
-| T4 | S3, S4 | inline | pending | launch-lists (+ script and tests) |
-| T5 | S3, S4 | inline | pending | launch-cross-post |
-| T6 | S3, S4 | inline | pending | launch-directories |
-| T7 | S3, S4 | inline | pending | launch-community-drafts |
-| T8 | S5 | inline | pending | validate + evals + dry run on a sample project |
+| T1 | S2, S7 | inline | done | 2009fad; `claude plugin validate . --strict --profile directory` passes |
+| T2 | S3, S4 | inline | done | f438725 |
+| T3 | S3, S4 | inline | done | bbca4fb; tests/make-assets.test.sh 10/10 |
+| T4 | S3, S4 | inline | done | e3a332f; RED 8 fail → GREEN 10/10; output identical to the manual PRs #1837 and awesome-mac #3995 |
+| T5 | S3, S4 | inline | done | 3766577; RED 6 fail → GREEN 7/7; body identical to the published Dev.to/Hashnode cross-post |
+| T6 | S3, S4 | inline | done | a5a98bf |
+| T7 | S3, S4 | inline | done | dd09200; RED 7 fail → GREEN 8/8; published r/macapps, Threads, X and Show HN texts pass |
+| T8 | S5 | inline | done | `claude plugin eval . --ablation none --allow-tools Write Edit Bash`: 3/3 cases, 10/10 graders (run-4, $0.55); 25 unit tests + 10 shell checks |
 | T9 | S6 | inline | pending | Portfolio blog post (en/es) |
 
 ## Log
@@ -33,3 +33,7 @@ Test runner: `claude plugin validate` and `claude plugin eval` (evals/), plus sh
 - L3: plugin layout confirmed from an installed plugin (brag 0.4.0): `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` with `"source": "./"`, `skills/<name>/SKILL.md`. The CLI offers `claude plugin validate` and `claude plugin eval`.
 - L4: route is inline for every task; no writer trigger (units share conventions and are small).
 - L5: Engram mirror pending: `mem_save` returned `ambiguous_project` (the MCP process resolves from `~/Developer`, offering only awesome-mac and storico). Resync when it resolves `launch-skills`.
+- L6: make-assets tests were written with the script, not before it (no RED observed for T3). Lists, cross-post and draft checker followed RED → GREEN.
+- L7: real-data dry runs replace a sample project: each script re-ran on JUMP's actual inputs and matched what was published by hand.
+- L8: eval run 1 scored 0.67/0.75/1. Causes: Bash was missing from the cases' `allowed_tools` (the CLI grant alone does not enable it) and the closed-list rubric was ambiguous although the answer was right. Pattern grants such as `Bash(python3 *)` still left Bash unused; plain `Bash` (OS-sandboxed) works. Run 4: all pass.
+- L9: not exercised end to end by evals: launch-cross-post and launch-directories need signed-in browser sessions. Their scripts are tested and every step was performed by hand for JUMP on 2026-10-28.
