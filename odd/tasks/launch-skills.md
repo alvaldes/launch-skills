@@ -24,7 +24,7 @@ Test runner: `claude plugin validate` and `claude plugin eval` (evals/), plus sh
 | T6 | S3, S4 | inline | done | a5a98bf |
 | T7 | S3, S4 | inline | done | dd09200; RED 7 fail → GREEN 8/8; published r/macapps, Threads, X and Show HN texts pass |
 | T8 | S5 | inline | done | `claude plugin eval . --ablation none --allow-tools Write Edit Bash`: 3/3 cases, 10/10 graders (run-4, $0.55); 25 unit tests + 10 shell checks |
-| T9 | S6 | inline | pending | Portfolio blog post (en/es) |
+| T9 | S6 | inline | done | portfolio ca45f05 on feat/launch-skills-post; build 0 errors, 0 warnings |
 
 ## Log
 
@@ -37,3 +37,4 @@ Test runner: `claude plugin validate` and `claude plugin eval` (evals/), plus sh
 - L7: real-data dry runs replace a sample project: each script re-ran on JUMP's actual inputs and matched what was published by hand.
 - L8: eval run 1 scored 0.67/0.75/1. Causes: Bash was missing from the cases' `allowed_tools` (the CLI grant alone does not enable it) and the closed-list rubric was ambiguous although the answer was right. Pattern grants such as `Bash(python3 *)` still left Bash unused; plain `Bash` (OS-sandboxed) works. Run 4: all pass.
 - L9: not exercised end to end by evals: launch-cross-post and launch-directories need signed-in browser sessions. Their scripts are tested and every step was performed by hand for JUMP on 2026-10-28.
+- L10: pending human decisions: create the public GitHub repo `alvaldes/launch-skills` and push; merge and push the portfolio post (it links to the repo, so the repo goes public first).
