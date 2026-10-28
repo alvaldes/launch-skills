@@ -1,0 +1,177 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="base.css">
+<style>
+body { --w: 1080px; --h: 1350px; }
+.slide { display: none; position: absolute; inset: 0; padding: 80px 76px 72px; flex-direction: column; }
+.slide.on { display: flex; }
+.top { display: flex; justify-content: space-between; align-items: center; font-size: 24px; color: var(--muted); }
+.top .brand img { width: 52px; height: 52px; border-radius: 13px; }
+.top .brand span { font-size: 26px; }
+.count { font-family: ui-monospace, Menlo, monospace; color: var(--dim); }
+.slide .term .body { font-size: 34px; line-height: 1.7; padding: 34px 36px; }
+.swipe { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: 26px; color: var(--muted); }
+.swipe b { color: var(--orange); font-size: 40px; }
+.kicker { font-family: ui-monospace, Menlo, monospace; font-size: 30px; color: var(--orange); letter-spacing: 1px; text-transform: uppercase; margin: 64px 0 24px; }
+h2 { font-weight: 800; letter-spacing: -1.5px; line-height: 1.04; font-size: 104px; }
+h2 em { font-style: normal; color: var(--orange); }
+.lead { font-size: 38px; color: var(--muted); line-height: 1.4; margin-top: 28px; }
+.lead b { color: var(--text); font-weight: 600; }
+
+/* 1: hook */
+.big { display: flex; align-items: center; gap: 36px; margin-top: 80px; }
+.big .n { font-size: 290px; font-weight: 800; letter-spacing: -10px; line-height: .85; }
+.big .n.o { color: var(--orange); }
+.big .l { font-size: 34px; color: var(--muted); line-height: 1.3; }
+.big .arrow { font-size: 110px; color: var(--dim); }
+
+/* 2: rules as tags */
+.tags { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 52px; }
+.tag { font-family: ui-monospace, Menlo, monospace; font-size: 33px; padding: 20px 26px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
+.tag small { display: block; font-family: -apple-system, sans-serif; font-size: 24px; color: var(--dim); margin-bottom: 4px; }
+.tag.hot { border-color: rgba(249,115,22,.55); background: rgba(249,115,22,.08); }
+
+/* 3: gates */
+.gates { margin-top: 48px; display: flex; flex-direction: column; gap: 20px; }
+.gate { display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 34px 34px; }
+.gate h4 { font-size: 38px; font-weight: 700; }
+.gate p { font-size: 31px; color: var(--muted); line-height: 1.35; }
+.gate p code { font-family: ui-monospace, Menlo, monospace; color: var(--orange); }
+.quote { margin-top: 44px; border-left: 5px solid var(--orange); padding: 8px 0 8px 30px; font-size: 34px; color: var(--text); line-height: 1.4; }
+.quote small { display: block; color: var(--dim); font-size: 25px; margin-top: 8px; }
+
+/* 4: tree */
+.tree { margin-top: 52px; font-family: ui-monospace, Menlo, monospace; font-size: 31px; line-height: 1.75; background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 32px 36px; color: var(--muted); }
+.tree b { color: var(--text); font-weight: 600; } .tree i { color: var(--dim); font-style: normal; } .tree .o { color: var(--orange); }
+
+/* 5: skills */
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 48px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 32px 30px; }
+.card h3 { white-space: nowrap; letter-spacing: -0.5px; font-family: ui-monospace, Menlo, monospace; font-size: 27px; color: var(--orange); margin-bottom: 10px; }
+.card p { font-size: 29px; color: var(--muted); line-height: 1.35; }
+
+/* 7: stats */
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 52px; }
+.stat { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; padding: 38px 34px; }
+.stat .v { font-size: 124px; font-weight: 800; letter-spacing: -3px; color: var(--orange); line-height: 1; }
+.stat .k { font-size: 31px; color: var(--muted); margin-top: 12px; line-height: 1.3; }
+.stat.wide { grid-column: span 2; }
+
+/* 8: cta */
+.cta code { display: block; font-family: ui-monospace, Menlo, monospace; font-size: 31px; background: var(--panel); border: 1px solid rgba(249,115,22,.55); border-radius: 16px; padding: 24px 28px; margin-top: 14px; color: var(--text); }
+.cta .label { font-family: ui-monospace, Menlo, monospace; font-size: 24px; color: var(--dim); margin-top: 36px; }
+.links { margin-top: 60px; font-family: ui-monospace, Menlo, monospace; font-size: 36px; line-height: 1.8; }
+.links b { color: var(--orange); font-weight: 600; }
+</style></head>
+<body>
+
+<section class="slide" data-n="1">
+  <div class="top"><div class="brand"><img src="../../.claude-plugin/icon.png" alt=""><span>launch-skills</span></div><span class="count">1/8</span></div>
+  <div class="big"><div><div class="n">14</div><div class="l">places to launch<br>one app</div></div><div class="arrow">→</div><div><div class="n o">6</div><div class="l">Claude skills<br>that do it for you</div></div></div>
+  <h2 style="margin-top:72px;font-size:90px">I launched my app<br>on 14 sites in 3 days.<br><em>Then I turned it<br>into skills.</em></h2>
+  <div class="swipe"><span>Here's what I learned</span><b>→</b></div>
+</section>
+
+<section class="slide" data-n="2">
+  <div class="top"><div class="brand"><img src="../../.claude-plugin/icon.png" alt=""><span>launch-skills</span></div><span class="count">2/8</span></div>
+  <div class="kicker">The problem</div>
+  <h2 style="font-size:86px">Every site has<br>its own rules.<br><em>I learned them<br>the hard way.</em></h2>
+  <div class="tags">
+    <div class="tag"><small>Product Hunt gallery</small>1270×760</div>
+    <div class="tag"><small>Dev.to cover</small>1000×420</div>
+    <div class="tag"><small>Hashnode cover</small>1600×840</div>
+    <div class="tag"><small>MacUpdate icon</small>512px PNG, transparent</div>
+    <div class="tag hot"><small>r/macapps</small>PCP format, once every 30 days</div>
+    <div class="tag hot"><small>Dev.to</small>canonical in Advanced Options</div>
+  </div>
+  <div class="swipe"><span></span><b>→</b></div>
+</section>
+
+<section class="slide" data-n="3">
+  <div class="top"><div class="brand"><img src="../../.claude-plugin/icon.png" alt=""><span>launch-skills</span></div><span class="count">3/8</span></div>
+  <div class="kicker">The surprise</div>
+  <h2>New accounts<br><em>can't launch.</em></h2>
+  <div class="gates">
+    <div class="gate"><h4>Hacker News</h4><p>Show HN from a new account lands on <code>/showlim</code></p></div>
+    <div class="gate"><h4>Indie Hackers</h4><p>Posting is for established members only</p></div>
+    <div class="gate"><h4>r/macapps</h4><p>10 karma earned inside the subreddit first</p></div>
+  </div>
+  <div class="quote">"overrun by AI slop submissions which took all the joy out of doing it."<small>awesome-macOS, closing public submissions the day before I got there</small></div>
+  <div class="swipe"><span></span><b>→</b></div>
+</section>
+
+<section class="slide" data-n="4">
+  <div class="top"><div class="brand"><img src="../../.claude-plugin/icon.png" alt=""><span>launch-skills</span></div><span class="count">4/8</span></div>
+  <div class="kicker">The idea</div>
+  <h2>A skill is a folder<br><em>your agent loads on its own.</em></h2>
+  <p class="lead">Instructions plus scripts. You don't call it by name: you say <b>"add my app to awesome-mac"</b> and the right one loads.</p>
+  <div class="tree">
+<b>skills/launch-lists/</b><br>
+├── <span class="o">SKILL.md</span>  <i># rules and steps</i><br>
+└── scripts/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── insert-list-line.py<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── add-json-entry.py
+  </div>
+  <div class="swipe"><span></span><b>→</b></div>
+</section>
+
+<section class="slide" data-n="5">
+  <div class="top"><div class="brand"><img src="../../.claude-plugin/icon.png" alt=""><span>launch-skills</span></div><span class="count">5/8</span></div>
+  <div class="kicker">The six skills</div>
+  <h2>One launch,<br><em>six jobs.</em></h2>
+  <div class="grid">
+    <div class="card"><h3>launch-kit</h3><p>Copy and every image size, from your project</p></div>
+    <div class="card"><h3>launch-cross-post</h3><p>Dev.to, Hashnode, Medium, canonical to your blog</p></div>
+    <div class="card"><h3>launch-lists</h3><p>One PR per awesome list</p></div>
+    <div class="card"><h3>launch-directories</h3><p>AlternativeTo, MacUpdate, Indie Hackers</p></div>
+    <div class="card"><h3>launch-community-drafts</h3><p>Show HN, Reddit, Product Hunt drafts, rule-checked</p></div>
+    <div class="card"><h3>launch-tracker</h3><p>Every channel, status and link</p></div>
+  </div>
+  <div class="swipe"><span></span><b>→</b></div>
+</section>
+
+<section class="slide" data-n="6">
+  <div class="top"><div class="brand"><img src="../../.claude-plugin/icon.png" alt=""><span>launch-skills</span></div><span class="count">6/8</span></div>
+  <div class="kicker">The rule</div>
+  <h2>It does the work.<br><em>You press publish.</em></h2>
+  <div class="term mono" style="margin-top:52px;font-size:1.2em"><div class="bar"><i></i><i></i><i></i></div><div class="body">
+    <div class="prompt"><b>›</b> add JUMP to awesome-mac</div>
+    <div class="ok"><b>✓</b>List still accepts public PRs</div>
+    <div class="ok"><b>✓</b>No duplicate PRs found</div>
+    <div class="ok"><b>✓</b>Category: Productivity</div>
+    <div class="ok"><b>✓</b>4 READMEs, 1 line each</div>
+    <div class="ask"><b>?</b>Open the pull request? (y/n)<span class="cursor"></span></div>
+  </div></div>
+  <p class="lead" style="font-size:34px">Sign-ins, CAPTCHAs and payments stay yours.</p>
+  <div class="swipe"><span></span><b>→</b></div>
+</section>
+
+<section class="slide" data-n="7">
+  <div class="top"><div class="brand"><img src="../../.claude-plugin/icon.png" alt=""><span>launch-skills</span></div><span class="count">7/8</span></div>
+  <div class="kicker">Tested</div>
+  <h2>Not vibes.<br><em>Tests.</em></h2>
+  <div class="stats">
+    <div class="stat"><div class="v">25</div><div class="k">unit tests for the scripts</div></div>
+    <div class="stat"><div class="v">10/10</div><div class="k">eval graders passing with <code class="mono">claude plugin eval</code></div></div>
+    <div class="stat wide"><div class="v">byte for byte</div><div class="k">each script, run on my real launch, matched what I had published by hand</div></div>
+  </div>
+  <div class="swipe"><span></span><b>→</b></div>
+</section>
+
+<section class="slide cta" data-n="8">
+  <div class="top"><div class="brand"><img src="../../.claude-plugin/icon.png" alt=""><span>launch-skills</span></div><span class="count">8/8</span></div>
+  <div class="kicker">Try it</div>
+  <h2>Open source.<br><em>Free. MIT.</em></h2>
+  <div class="label">Install in Claude Code</div>
+  <code>/plugin marketplace add alvaldes/launch-skills</code>
+  <code>/plugin install launch-skills@launch-skills</code>
+  <div class="label">Or copy <code style="display:inline;padding:4px 10px;font-size:24px;margin:0">skills/</code> into any agent that reads SKILL.md</div>
+  <div class="links"><b>→</b> github.com/alvaldes/launch-skills<br><b>→</b> alvaldes.dev/blog</div>
+  <div class="swipe"><span>Launching something? Tell me where it worked.</span><span></span></div>
+</section>
+
+<script>
+  const n = new URLSearchParams(location.search).get("s") || "1";
+  document.querySelector(`.slide[data-n="${n}"]`).classList.add("on");
+</script>
+</body></html>
