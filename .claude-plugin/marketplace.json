@@ -1,0 +1,15 @@
+{
+  "name": "launch-skills",
+  "description": "Skills that launch a new tool everywhere it belongs, and stop before every public action.",
+  "owner": {
+    "name": "Angel L. Valdés",
+    "url": "https://www.alvaldes.dev"
+  },
+  "plugins": [
+    {
+      "name": "launch-skills",
+      "source": "./",
+      "description": "Asset kit, cross-posts, awesome lists, directories, community drafts and a status tracker for launching a tool."
+    }
+  ]
+}

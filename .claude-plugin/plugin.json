@@ -1,0 +1,13 @@
+{
+  "name": "launch-skills",
+  "description": "Launch a new tool everywhere it belongs: asset kit, cross-posts, awesome lists, directories, community drafts and a status tracker. Stops before every public action.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Angel L. Valdés",
+    "url": "https://www.alvaldes.dev"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/alvaldes/launch-skills",
+  "repository": "https://github.com/alvaldes/launch-skills",
+  "keywords": ["launch", "marketing", "product-hunt", "awesome-list", "skills", "open-source"]
+}
