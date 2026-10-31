@@ -19,10 +19,13 @@ tags: ["Launch", "macOS"]
 
 Intro paragraph.
 
+Like [the last one](/en/blog/other/) and a [CDN file](//cdn.example/x.js).
+
 ![Settings](./settings.webp)
 
 ```bash
 echo "![not an image](./code.png)"
+echo "[not a link](/en/blog/code/)"
 ```
 """
 
@@ -52,9 +55,17 @@ class PrepareArticle(unittest.TestCase):
         self.assertTrue(body.startswith("Intro paragraph."))
         self.assertIn("![Settings](https://cdn.example/settings.webp)", body)
 
+    def test_root_relative_links_point_at_the_canonical_site(self):
+        self.prepare()
+        body = (self.out / "body.md").read_text()
+        self.assertIn("[the last one](https://example.dev/en/blog/other/)", body)
+        self.assertIn("[CDN file](//cdn.example/x.js)", body)
+
     def test_code_blocks_are_left_alone(self):
         self.prepare()
-        self.assertIn('echo "![not an image](./code.png)"', (self.out / "body.md").read_text())
+        body = (self.out / "body.md").read_text()
+        self.assertIn('echo "![not an image](./code.png)"', body)
+        self.assertIn('echo "[not a link](/en/blog/code/)"', body)
 
     def test_footer_links_the_canonical_post(self):
         self.prepare()

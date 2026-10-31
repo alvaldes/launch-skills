@@ -82,6 +82,21 @@ class InsertListLine(unittest.TestCase):
         self.assertTrue(lines[i - 1].startswith("* [Karabiner-Elements]"))
         self.assertEqual(lines[i + 1], "")
 
+    def test_accented_names_sort_by_their_base_letter(self):
+        self.file.write_text(
+            "### Menu Bar Tools\n\n"
+            "* [cctop](https://cctop.app) - Sessions.\n"
+            "* [Çentik](https://example.com/centik) - Notch.\n"
+            "* [ChargeMonitor](https://example.com/charge) - Battery.\n"
+            "* [NetFluss](https://example.com/netfluss) - Speeds.\n"
+            "* [Notchly](https://example.com/notchly) - Notch.\n"
+        )
+        line = "* [Netty](https://alvaldes.github.io/netty/) - Internet status."
+        r = run("insert-list-line.py", str(self.file), "--section", "### Menu Bar Tools", "--line", line)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        names = [l.split("]")[0][3:] for l in self.file.read_text().splitlines() if l.startswith("* [")]
+        self.assertEqual(names, ["cctop", "Çentik", "ChargeMonitor", "NetFluss", "Netty", "Notchly"])
+
     def test_refuses_duplicate_name(self):
         run("insert-list-line.py", str(self.file), "--section", "### Productivity", "--line", LINE)
         r = run("insert-list-line.py", str(self.file), "--section", "### Productivity", "--line", LINE)

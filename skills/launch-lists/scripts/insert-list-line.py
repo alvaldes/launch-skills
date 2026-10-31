@@ -9,6 +9,7 @@ import argparse
 import pathlib
 import re
 import sys
+import unicodedata
 
 ITEM = re.compile(r"^\s*[*-] \[([^\]]+)\]")
 
@@ -16,6 +17,12 @@ ITEM = re.compile(r"^\s*[*-] \[([^\]]+)\]")
 def name_of(line):
     match = ITEM.match(line)
     return match.group(1) if match else None
+
+
+def sort_key(name):
+    """Compare names by their base letters, so 'Çentik' sorts with C, not after Z."""
+    decomposed = unicodedata.normalize("NFKD", name)
+    return "".join(c for c in decomposed if not unicodedata.combining(c)).casefold()
 
 
 def main():
@@ -56,7 +63,7 @@ def main():
 
     position = items[-1] + 1
     for i in items:
-        if name_of(lines[i]).casefold() > new_name.casefold():
+        if sort_key(name_of(lines[i])) > sort_key(new_name):
             position = i
             break
     lines.insert(position, args.line)

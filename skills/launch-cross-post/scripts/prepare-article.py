@@ -3,8 +3,8 @@
 
 Usage: prepare-article.py POST.md --canonical URL --out DIR [--asset ./img.webp=https://...]... [--footer TEXT]
 
-Writes DIR/body.md (no front matter, relative images replaced by public URLs, footer linking the
-canonical post) and DIR/meta.json (title, description, tags, cover, canonical_url).
+Writes DIR/body.md (no front matter, relative images replaced by public URLs, root-relative links
+such as /en/blog/post/ made absolute on the canonical site, footer linking the canonical post) and DIR/meta.json (title, description, tags, cover, canonical_url).
 Exit codes: 0 written, 2 bad input (nothing written).
 """
 import argparse
@@ -12,8 +12,10 @@ import json
 import pathlib
 import re
 import sys
+import urllib.parse
 
 IMAGE = re.compile(r"(!\[[^\]]*\]\()(\.{1,2}/[^)\s]+)(\))")
+ROOT_LINK = re.compile(r"(\]\()(/(?!/)[^)\s]*)(\))")
 FENCE = re.compile(r"^(```|~~~)")
 
 
@@ -51,6 +53,8 @@ def main():
         print("--canonical must be an https URL", file=sys.stderr)
         return 2
     assets = dict(a.split("=", 1) for a in args.asset)
+    canonical = urllib.parse.urlsplit(args.canonical)
+    site = f"{canonical.scheme}://{canonical.netloc}"
     meta, body = front_matter(pathlib.Path(args.post).read_text())
 
     out_lines, unmapped, in_code = [], [], False
@@ -64,6 +68,7 @@ def main():
                     return m.group(0)
                 return m.group(1) + assets[m.group(2)] + m.group(3)
             line = IMAGE.sub(swap, line)
+            line = ROOT_LINK.sub(lambda m: m.group(1) + site + m.group(2) + m.group(3), line)
         out_lines.append(line)
     if unmapped:
         print("relative images without --asset: " + ", ".join(sorted(set(unmapped))), file=sys.stderr)
