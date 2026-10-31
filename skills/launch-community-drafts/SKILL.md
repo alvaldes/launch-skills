@@ -27,7 +27,7 @@ Use when the user wants launch texts for communities (Reddit, Hacker News, Produ
 | r/macapps (main feed or megathread) | `assets/reddit-pcp.md` | `reddit-pcp` |
 | Show HN | `assets/show-hn.md` | `show-hn` |
 | Product Hunt | `assets/product-hunt.md` | `product-hunt` |
-| LinkedIn, X, Threads | `assets/social.md` | `linkedin`, `x`, `threads` |
+| LinkedIn, X, Threads | `assets/social.md`, one file per network (`linkedin.md`, `x.md`, `threads.md`): the checker reads the whole file | `linkedin`, `x`, `threads` |
 | r/opensource | No draft: the maker writes it; offer a rules check only | `reddit` |
 
 ## Execution Steps

@@ -24,12 +24,12 @@ Use when the user wants a tool listed in app directories or suggested to newslet
 
 | Directory | Notes |
 |---|---|
-| AlternativeTo | After submitting, add existing apps as alternatives, or the listing stays nearly invisible. The free queue is slow; mention the paid option without choosing it |
+| AlternativeTo | Set icon and screenshots with the **by URL** fields (file uploads do not register). After submitting, confirm on My submissions and add existing apps as alternatives, or the listing stays nearly invisible. The free queue is slow; mention the paid option without choosing it |
 | MacUpdate | Transparent PNG icon, up to 5 PNG/JPG screenshots; put first-run caveats (for example not notarized) in the reviewer comments |
 | Indie Hackers | Product page first; then fill motivation, start date, founders, model, funding, commitment, platforms, tags so it appears in the directory |
 | AppAddict | Review form; for a free app answer No to the NFR license and say it is free |
 | iOS Dev Weekly | Suggest the technical post, not the app page |
-| Indie Goodies | Icon and screenshot as public URLs |
+| Indie Goodies | Now a GitHub list (`onmyway133/awesome-open-source-mac-apps`, one JSON per app) that needs 100+ GitHub stars; below that, mark it blocked. When the gate is met, it is a pull request (launch-lists) |
 
 ## Execution Steps
 

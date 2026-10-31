@@ -2,6 +2,8 @@
 
 The maker rewrites these in their own voice before posting. Links go where each network rewards them.
 
+Save each network to its own file (`drafts/linkedin.md`, `drafts/x.md`, `drafts/threads.md`) without its heading: `check-draft.py` checks the whole file, so a shared file fails the X and Threads length checks.
+
 ## LinkedIn ({language})
 Hook (comparison or problem, two lines) / why it exists / what it does (3 short lines, one per action) / how it works (one line) / credit to prior work / a question for the reader / 3 hashtags.
 First comment: the link to the canonical post.

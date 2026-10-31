@@ -25,7 +25,7 @@ Use when the user wants a post from their own site republished on Dev.to, Hashno
 |---|---|
 | Dev.to | New post. Editor ignores front matter: fill title, cover (1000×420), up to 4 tags (commit each with a real comma key press), body; canonical in **Advanced Options** → Save Draft |
 | Hashnode | Needs a publication first (ask for its name and subdomain). Markdown mode; cover 1600×840; subheading; header **Publish** opens Draft settings → Discovery: tags, SEO description, "Are you republishing?" canonical; final Publish is inside |
-| Medium | The user imports with **Stories → Import a story** and the canonical URL. Afterwards: replace tables with lists, remove any site suffix the importer added to the title |
+| Medium | Import with **Stories → Import a story** and the canonical URL (browser automation can do it once the user is signed in). The importer drops tables, code blocks and images and adds a site suffix to the title: compare the draft with the original section by section and fix each one before publishing (see `references/channels.md`) |
 | Platform not listed | Read its editor first; same rules |
 
 ## Execution Steps

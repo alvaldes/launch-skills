@@ -1,6 +1,6 @@
 # Launch channels
 
-What each channel accepts, what it requires and how a submission works. Every rule was read on the site itself in October 2026. Rules change: before acting on a channel, re-read its rules page and flag any difference to the user.
+What each channel accepts, what it requires and how a submission works. Every rule was read on the site itself in October 2026 and rechecked during a launch on 2026-10-31. Rules change: before acting on a channel, re-read its rules page and flag any difference to the user.
 
 Automation levels:
 
@@ -62,7 +62,7 @@ All three carry the same article; the canonical URL keeps search engines crediti
 
 ### Medium
 - How: **Stories → Import a story** with the canonical URL; the importer sets the canonical and the original date.
-- Gotchas: no tables (replace them with a list); the importer copies the page `<title>`, so a site suffix lands in the story title. Fix the title after importing.
+- Gotchas: the importer copies the page `<title>`, so a site suffix lands in the story title. It also drops tables, fenced code blocks and images, and adds a stray reading-time line and an empty heading after every section heading. After importing, compare the draft with the original section by section: fix the title, rebuild tables as lists, re-add code blocks (type ```` ``` ```` on an empty line) and images (the **+** button), and delete the stray lines. There is no cover field: the first image after the title becomes the preview image.
 - Level: draft plus a manual import.
 
 ## Launch communities
@@ -70,6 +70,7 @@ All three carry the same article; the canonical URL keeps search engines crediti
 ### Product Hunt
 - Format: name, tagline, description, product categories (up to 3), launch tags (up to 3), pricing, links, logo, gallery (the first image is the share preview), optional video, maker's first comment. Choose **I made this**.
 - How: Submit → product URL → the draft autosaves → **Schedule launch** (launches start at 12:01 a.m. Pacific).
+- Gotchas: Product Hunt puts an image from the website (often the icon) first in the gallery, and several images uploaded at once land in any order. Remove what you did not choose and upload the gallery one image at a time, first image first; check the order before saving.
 - Rules: do not ask for upvotes; invite people to look.
 - Level: browser for the draft; the human schedules.
 
@@ -101,17 +102,19 @@ All three carry the same article; the canonical URL keeps search engines crediti
 ### AlternativeTo
 - Format: name, website, short and full description (no links), pricing, license model and license, source URL, tags, features, platforms with notes, author with country and website, icon, screenshots with captions.
 - How: submit, then add existing apps as alternatives; without alternatives the app barely shows up.
-- Gotchas: the free review queue can take a very long time; paid priority review exists. The human decides whether to pay.
+- Gotchas: the free review queue can take a very long time; paid priority review exists. The human decides whether to pay. Icon and screenshots set through a file input do not register (the submit then asks for an icon); use **Upload icon by URL** and **Upload screenshot by URL** with the public asset URLs. In the tag and language pickers, Backspace on an empty field removes the last chosen value. After a successful submit the form resets and shows its "required" hints again; confirm on **My submissions**, which also links to **Suggest alternatives**. Alternatives must already be listed on AlternativeTo; check each one's website link before choosing it.
 - Level: browser.
 
 ### MacUpdate (macOS)
 - Format: name, developer, download URL, product page, support URL, version, price; short and long description, version changes, system requirements; one transparent PNG icon (512×512 preferred); up to 5 PNG or JPG screenshots under 8 MB; comments for reviewers.
+- How: **Add App** in the site footer opens `member.macupdate.com/content/submit` (needs a signed-in account). The confirmation says the review answers by email within 10 days.
 - Gotchas: mention an unnotarized build in the comments.
 - Level: browser.
 
 ### Indie Goodies, Open Source Mac Apps (macOS)
-- Format (Airtable form): name, description, link, icon URL, screenshot URL, category.
-- Level: browser.
+- How (since October 2026): a GitHub list, `onmyway133/awesome-open-source-mac-apps`. One JSON file per app in `apps/<slug>.json` with `name`, `repo` (`owner/name`), `description` (one line, up to 160 characters, no trailing period), `category` (a slug from its CONTRIBUTING), and optional `homepage`, `icon` and `screenshot` URLs. One app per pull request; the README and indiegoodies.com are generated after the merge.
+- Gate: at least 100 GitHub stars, enforced by its check; open source on GitHub, not archived.
+- Level: CLI, once the gate is met.
 
 ### MacMenuBar (macOS)
 - Fit: apps that live in the menu bar, where removing the icon would break how people use them.
@@ -140,8 +143,8 @@ All three carry the same article; the canonical URL keeps search engines crediti
 
 | Channel | Fit | How | Level |
 |---|---|---|---|
-| AppAddict | Independent Mac apps | "Submit your app for review" form: developer, contact email, app name, 200 to 500 word description, download link, NFR license yes/no (for a free app answer No and say it is free) | browser |
-| iOS Dev Weekly | Content for Apple-platform developers: send the technical post, not the app page | `suggest.iosdevweekly.com`: name, email, link, who wrote it, blog post yes/no, Swift library yes/no, why | browser |
+| AppAddict | Independent Mac apps | "Submit your app for review" link on appaddict.app, a Cognito form: developer first and last name, contact email, app name, 200 to 500 word description, download link with platform, NFR license yes/no (for a free app answer No and say it is free). The NFR radio is covered by its label; click the label text | browser |
+| iOS Dev Weekly | Content for Apple-platform developers: send the technical post, not the app page | `suggest.iosdevweekly.com`: name, email, link, who wrote it, blog post yes/no, Swift library yes/no, why. The form asks not to send posts from blogs already in the iOS Dev Directory (iosdevdirectory.com), which Dave reads by RSS; check the directory first. It emails Dave directly, so send once | browser |
 | Brett Terpstra | Keyboard and productivity tools | Email only, short and personal | draft |
 | Daring Fireball | Skip: the contact page is for feedback, not pitches | | |
 | Swift Weekly Brief | Skip: inactive since June 2022 | | |
